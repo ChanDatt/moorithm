@@ -13,9 +13,16 @@
 }
 
 :root{
-    --text-color: ;
+    --text-color-darkest: #062B43;
+    --text-color-dark: #074666;
+    --text-color-medium: #5791AB;
+    --text-color-light: #9ECEDE;
+    --text-color-lightest: #D0D7E2;
+    --text-color-blur: rgba(225, 255, 255, 0.05);
     --text-hover-color-01: ;
     --text-hover-color-02: ;
+
+    --blur: 15px;
 
     /********* TRANSITION *********/
     --tran-02: all 0.2s ease;
@@ -39,8 +46,7 @@ body{
 }
 
 h1{
-    color: #9ECEDE;
-
+    color: var(--text-color-light);
 }
 
 nav{
@@ -54,55 +60,44 @@ nav #chevrons{
     transform: translateY(-50%) scaleX(2) scaleY(3.5);
     cursor: pointer;
     z-index: 1000;
+    transition: var(--tran-04);
 }
 
 #chevrons i{
-    color: #5791AB;
+    color: var(--text-color-medium);
     font-size: 40px;
-    transition: transform 0.3s ease;
 }
 
 #chevrons i:hover{
+    appearance: var(--tran-04);
+    transition: var(--tran-03);
     color: #074666;
 }
-
-/* #chevrons{
-    position: fixed;
-    top: 50%;
-    margin-left: 15px;
-    transform: translateY(-50%) scaleX(2.5) scaleY(3);
-    cursor: pointer;
-    z-index: 1000;
-}
-
-#chevrons i{
-    color: #5791AB;
-    font-size: 40px;
-    padding: 5px 8px;
-    width: auto; 
-    transition: transform 0.3s ease;
-}
-
-#chevrons i:hover{
-    color: #074666;
-} */
 
 nav ul{
     list-style: none;
 }
 
 nav li{
-    height: 50px;
+    height: 70px;
 }
 
 nav a{
-    /* height: 100%; */
-    padding: 0 30px;
-    text-decoration: none;
     display: flex;
     align-items: center;
-    color: #9ECEDE;
+    color: var(--text-color-light);
+    height: 140px;
+    padding: 0 30px;
+    font-size: 25px;
+    text-decoration: none;
+    transition: var(--tran-02);
 }
+
+nav a:hover{
+    color: var(--text-color-medium);
+}
+
+/*slide bar*/
 
 .slidebar {
     position: fixed;
@@ -111,12 +106,57 @@ nav a{
     height: 100vh;
     width: 250px;
     z-index: 999;
-    background-color: rgba(225, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
+    background-color: var(--text-color-blur);
+    backdrop-filter: blur(var(--blur));
     box-shadow: 10px 0 10px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     border-radius: 0 50px 50px 0;
+    transition: var(--tran-04);
+    white-space: nowrap;
+    opacity: 1;
+}
+
+.slidebar.close{
+    width: 0px;
+}
+
+.slidebar.close a{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slidebar.close #chevrons{
+    right: -65px;
+}
+
+.slidebar.close .toggle{
+    transform: rotate(180deg);
+}
+
+.home{
+    display: none;
+    position: relative;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    align-items: center;
+    justify-content: center;
+}
+
+.slidebar.close ~ .home{
+    left: 88px;
+    width: calc(100% - 88px)
+}
+
+.home .box{
+    height: 550px;
+    width: 550px;
+    background-color: var(--text-color-blur);
+    backdrop-filter: blur(var(--blur));
+    border-radius: 25px;
+    box-shadow: 10px 0 10px rgba(0,0,0,0.1);
+    transition: var(--tran-04);
 }
