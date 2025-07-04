@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./asset/style/sorting.css">
+    <title>moorithm</title>
+</head>
+<body>
+    <div class= "title">
+        <h1>moorithm</h1>
+    </div>
+    
+    <nav class="slidebar close">
+        <div id = 'chevrons'>
+            <i class='bx bx-chevrons-left toggle'></i> 
+        </div>
+        <ul>
+            <li><a href="#" id="arr">array</a></li>
+            <li><a href="#" id="linkedList">linked list</a></li>
+            <li><a href="#" id="sorting">sorting</a></li>
+            <li><a href="#" id="hashTable">hash table</a></li>
+            <li><a href="#" id="bst">bst</a></li>
+        </ul>        
+    </nav>
+    <div class="home">
+            <h2>Bubble Sort Step-by-Step Viewer</h2>
+                <div class="controls">
+                        <div class="ctrl_above">
+                            <h3>Number</h3>
+                            <input type="number" id="numElements" value="8" min="5" max="30">
+                            <button onclick="generateData()">Create</button>
+                        </div>
+                        <div class="ctrl_below">
+                            <h3>Value</h3>
+                            <input type="text" id = "elements" value="12, 18, 13, 23, 4, 1, 19, 7">
+                            <button onclick="generateRandom()">Random</button>
+                            <div id="step-controls">
+                                <button onclick="prevStep()">Previous</button>
+                                <button onclick="nextStep()">Next</button>
+                                <button id="btnAutoSorting" onclick="autoSort()">Auto Sort</button>
+                                <button onclick="resetSteps()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <div class="controls_2">
+                    <div class="wrong_text">
+                        <p id = "wrongElements"></p>
+                    </div>
+                    <input type="range" id="stepSlider" min="0" max="0" value="0" step="1" oninput="sliderStepChanged(this.value)"/>
+                </div>
+
+              <canvas id="visualizer" width="800" height="400"></canvas>
+    </div>
+    <script src="./asset/style/sorting.js"></script>
+</body>
+</html>
