@@ -20,6 +20,11 @@ toggle.addEventListener("click", () => {
   slidebar.classList.toggle("close");
 });
 
+elementsInput.addEventListener("click", function() {
+  this.classList.add("expanded");
+});
+
+
 // Kiểm tra nhập input hợp lệ
 elementsInput.addEventListener("input", function () {
   const inputString = elementsInput.value.trim();
@@ -57,7 +62,7 @@ function generateRandom() {
   elementsInput.value = randomArray.join(',');
   wrongElements.textContent = "";
 
-  generateData(); // xử lý như khi bấm nút Create
+  generateData(); 
 }
 
 
@@ -93,6 +98,7 @@ function drawWithLabels(arr, highlight = [], sorted = []) {
     ctx.fillText(Math.round(val), x + barWidth / 2, y - 6);
     ctx.fillText(idx, x + barWidth / 2, canvas.height - 4);
   });
+  elementsInput.classList.remove("expanded");
 }
 
 // Animation tạo mảng
@@ -141,12 +147,13 @@ function generateData() {
     }
   } else {
     values = Array.from({ length: n }, () => Math.floor(Math.random() * MAX_VALUE) + 1);
-    elementsInput.value = values.join(','); // cập nhật input cho đồng nhất
+    elementsInput.value = values.join(','); 
   }
 
   array = values;
   steps = [{ array: array.slice(), comparing: [] }];
   stepIndex = 0;
+  elementsInput.classList.remove("expanded");
   animateCreate(array);
   runSort();
 }
@@ -181,6 +188,7 @@ function nextStep() {
     stepIndex++;
     drawWithLabels(steps[stepIndex].array, steps[stepIndex].comparing, steps[stepIndex].sorted);
     slider.value = stepIndex;
+    updateSliderProgress(slider)
   }
 }
 
@@ -190,6 +198,7 @@ function prevStep() {
     stepIndex--;
     drawWithLabels(steps[stepIndex].array, steps[stepIndex].comparing, steps[stepIndex].sorted);
     slider.value = stepIndex;
+    updateSliderProgress(slider)
   }
 }
 
@@ -198,6 +207,7 @@ function resetSteps() {
   stepIndex = 0;
   drawWithLabels(steps[0].array, steps[0].comparing, steps[0].sorted);
   slider.value = 0;
+  updateSliderProgress(slider)
 }
 
 // Tự động chạy

@@ -1,7 +1,7 @@
 *{
     padding:0;
     margin:0;
-    box-sizing: border-time;
+    box-sizing: border-box;
 }
 
 :root{
@@ -24,6 +24,7 @@
     --tran-03: all 0.3s ease;
     --tran-04: all 0.4s ease;
     --tran-05: all 0.5s ease;
+    --tran-10: all 1s ease;
 }
 
 body{
@@ -92,8 +93,8 @@ nav a:hover{
     color: var(--text-color-medium);
 }
 
-/*slide bar*/
 
+/*slide bar*/
 .slidebar {
     position: fixed;
     top: 0;
@@ -138,6 +139,14 @@ nav a:hover{
     transform: translate(-50%, -50%);
 }
 
+.sort_title{
+    width: 100%;
+}
+
+.sort_title h2{
+    align-items: center;
+}
+
 .controls {
     margin-top: 50px;
     margin-bottom: 10px;
@@ -156,7 +165,16 @@ h3{
 }
 
 .controls input{
-    width: 40px;
+    width: 50px;
+}
+
+.lengthen{
+    width: 50px;
+    transition: var(--tran-10);
+}
+
+.lengthen.expanded{
+    width: 160px;
 }
 
 #step-controls {
@@ -202,22 +220,27 @@ input, button {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    padding: 0;
-    background: transparent;
+    background: linear-gradient(to right, var(--text-color-medium), var(--text-color-medium)) no-repeat;
+    background-size: 0% 100%;
+    background-color: transparent;
+    border: none;
     outline: none;
+    height: 12px;
+    border-radius: 15px;
+    cursor: pointer;
 }
+
 
 #stepSlider::-webkit-slider-runnable-track{
     width: 100%;
     cursor: pointer;
-    background: var(--blur);
     border-radius: 15px;
     border: 2px solid var(--text-color-light);
     transition: 0.2s ease-in-out;
     background: linear-gradient(
         to right,
-        #66c0f4 var(--progress-percent), 
-        #000000 var(--progress-percent)  
+        var(--text-color-medium) var(--progress-percent), 
+        #ffffff00 var(--progress-percent)  
     );
 }
 
@@ -235,7 +258,6 @@ input, button {
 #stepSlider:hover::-webkit-slider-thumb{
     background: #D0D7E2;
     border: 2px solid var(--text-color-darkest);
-
 }       
 
 #stepSlider:active::-webkit-slider-thumb{

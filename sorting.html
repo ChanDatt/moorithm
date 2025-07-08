@@ -25,17 +25,19 @@
         </ul>        
     </nav>
     <div class="home">
-            <h2>Bubble Sort Step-by-Step Viewer</h2>
+        <div class="sort_title">
+            <h2>Bubble Sort</h2>
+        </div>
                 <div class="controls">
                         <div class="ctrl_above">
                             <h3>Number</h3>
                             <input type="number" id="numElements" value="8" min="5" max="30">
-                            <button onclick="generateData()">Create</button>
+                            <button onclick="generateRandom()">Random</button>
                         </div>
                         <div class="ctrl_below">
                             <h3>Value</h3>
-                            <input type="text" id = "elements" value="12, 18, 13, 23, 4, 1, 19, 7">
-                            <button onclick="generateRandom()">Random</button>
+                            <input type="text" id = "elements" class="lengthen" value="12, 18, 13, 23, 4, 1, 19, 7">
+                            <button onclick="generateData()">Create</button>
                             <div id="step-controls">
                                 <button onclick="prevStep()">Previous</button>
                                 <button onclick="nextStep()">Next</button>
