@@ -56,6 +56,20 @@
 
               <canvas id="visualizer" width="800" height="400"></canvas>
     </div>
+    
+    <div id="pseudocode-box">
+        <div id = 'chevrons_1'>
+            <i class='bx bx-chevrons-left'></i> 
+        </div>
+        <pre><code id="pseudocode">
+            <span id="line1">void bubbleSort(int numbers[], int array_size) {</span>
+            <span id="line2">   int i, j;</span>
+            <span id="line3">   for (i = array_size - 1; i >= 0; i--)</span>
+            <span id="line4">      for (j = 1; j <= i; j++)</span>
+            <span id="line5">         if (numbers[j - 1] > numbers[j])</span>
+            <span id="line6">            swap(numbers[j - 1], numbers[j]) }</span>
+        </code></pre>
+    </div>
     <script src="./asset/style/sorting.js"></script>
 </body>
 </html>

@@ -10,6 +10,9 @@
     --text-color-medium: #5791AB;
     --text-color-light: #9ECEDE;
     --text-color-lightest: #D0D7E2;
+    --text-color-yellow: #F5D04C;
+    --text-color-yellow-2: #cfab27;
+
     --text-color-blur: rgba(225, 255, 255, 0.05);
     --text-color-blur-light: rgba(191, 227, 227, 0.73);
     --text-hover-color-01: ;
@@ -143,12 +146,8 @@ nav a:hover{
     width: 100%;
 }
 
-.sort_title h2{
-    align-items: center;
-}
-
 .controls {
-    margin-top: 50px;
+    margin-top: 25px;
     margin-bottom: 10px;
 }
 
@@ -156,12 +155,19 @@ nav a:hover{
     display: flex;
 }
 
+.sort_title h2 {
+    text-align: center; 
+    font-size: 45px;
+    letter-spacing: 5px;
+    color: var(--text-color-yellow-2); 
+}
+
 h3{
     width: 100px;
     align-content: center;
     text-align: right;
     margin-right: 10px;
-    color: var(--text-color-light);
+    color: var(--text-color-yellow-2);
 }
 
 .controls input{
@@ -205,7 +211,6 @@ input, button {
 
 .wrong_text{
     width: 750px;
-    align-content: center;
     text-shadow: var(--shadow-dark);
 }
 
@@ -220,7 +225,6 @@ input, button {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    background: linear-gradient(to right, var(--text-color-medium), var(--text-color-medium)) no-repeat;
     background-size: 0% 100%;
     background-color: transparent;
     border: none;
@@ -228,6 +232,7 @@ input, button {
     height: 12px;
     border-radius: 15px;
     cursor: pointer;
+    transition: var(--tran-04);
 }
 
 
@@ -267,8 +272,53 @@ input, button {
 canvas {
     margin-top: 15px;
     padding: 20px;
-    border: #D0D7E2 5px solid;
+    border: var(--text-color-light) 4px solid;
     background-color: var(--text-color-blur);
     border-radius: 34px;
     backdrop-filter: var(--blur);
+}
+
+
+/*Pseudocode*/
+#pseudocode-box{
+    position: fixed;
+    bottom: 35px;
+    right: 0px;
+    padding: 6px 15px;
+    border-radius: 25px;
+    font-family: monospace;
+    font-size: 11px;
+    line-height: 0.5;
+    color: #d0d7e2;
+    max-width: 415px;
+    z-index: 1000;
+    box-shadow: var(--shadow-dark);
+    backdrop-filter: blur(10px);
+    border: 3.5px solid var(--text-color-light);
+    transition: var(--tran-02)
+
+}
+
+#pseudocode-box span{
+    display: block;
+    padding: 10px 5px;
+    transition: background 0.3s ease;
+}
+
+#pseudocode .highlight{
+    background-color: rgba(255,255,255,0.15);
+    color: #ffffff;
+    font-weight: bold;
+    border-left: 3px solid var(--text-color-lightest);
+    padding-left: 6px;
+}
+
+#pseudocode-box:hover{
+    border: 3.5px solid var(--text-color-medium);
+    cursor: pointer;
+}
+
+#pseudocode-box.pseudocode_close{
+    right: -340px;
+    transition: var(--tran-10);
 }

@@ -4,6 +4,7 @@ const slidebar = document.querySelector(".slidebar");
 const toggle = document.querySelector(".toggle");
 const elementsInput = document.getElementById("elements");
 const wrongElements = document.getElementById("wrongElements");
+const pseudocode = document.getElementById("pseudocode-box");
 
 let array = [];
 let steps = [];
@@ -79,13 +80,13 @@ function drawWithLabels(arr, highlight = [], sorted = []) {
 
     if (sorted.includes(idx)) {
       const gradient = ctx.createLinearGradient(x, canvas.height, x, y);
-      gradient.addColorStop(0, "#2ecc71");
+      gradient.addColorStop(0, "#cfab27");
       gradient.addColorStop(0.90, "#e74c3c"); 
       color = gradient;
     } else if (highlight.includes(idx)) {
       const gradient = ctx.createLinearGradient(x, canvas.height, x, y);
       gradient.addColorStop(0, "#3498db");
-      gradient.addColorStop(1, "#e74c3c");  
+      gradient.addColorStop(0.9, "#e74c3c");  
       color = gradient;
     }
 
@@ -165,16 +166,18 @@ function runSort() {
   steps = [{ array: arr.slice(), comparing: [], sorted: [] }];
 
   for (let i = 0; i < arr.length; i++) {
+    steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice(), line: 3});
     for (let j = 0; j < arr.length - i - 1; j++) {
-      steps.push({ array: arr.slice(), comparing: [j, j + 1], sorted: sorted.slice() });
+      steps.push({ array: arr.slice(), comparing: [j, j + 1], sorted: sorted.slice(), line: 4 });
+      steps.push({ array: arr.slice(), comparing: [j, j + 1], sorted: sorted.slice(), line: 5 });
 
       if (arr[j] > arr[j + 1]) {
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-        steps.push({ array: arr.slice(), comparing: [j, j + 1], sorted: sorted.slice() });
+        steps.push({ array: arr.slice(), comparing: [j, j + 1], sorted: sorted.slice(), line: 6 });
       }
     }
     sorted.push(arr.length - i - 1);
-    steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice() });
+    steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice(), line: 4 });
   }
 
   slider.max = steps.length - 1;
@@ -189,6 +192,7 @@ function nextStep() {
     drawWithLabels(steps[stepIndex].array, steps[stepIndex].comparing, steps[stepIndex].sorted);
     slider.value = stepIndex;
     updateSliderProgress(slider)
+    highlightLine(steps[stepIndex].line || 0);
   }
 }
 
@@ -199,6 +203,7 @@ function prevStep() {
     drawWithLabels(steps[stepIndex].array, steps[stepIndex].comparing, steps[stepIndex].sorted);
     slider.value = stepIndex;
     updateSliderProgress(slider)
+    highlightLine(steps[stepIndex].line || 0);
   }
 }
 
@@ -208,6 +213,7 @@ function resetSteps() {
   drawWithLabels(steps[0].array, steps[0].comparing, steps[0].sorted);
   slider.value = 0;
   updateSliderProgress(slider)
+  highlightLine(steps[stepIndex].line || 0);
 }
 
 // Tự động chạy
@@ -230,13 +236,13 @@ function autoSort() {
         drawWithLabels(steps[stepIndex].array, steps[stepIndex].comparing, steps[stepIndex].sorted);
         slider.value = stepIndex;
         updateSliderProgress(slider)
+        highlightLine(steps[stepIndex].line || 0);
       } else {
         clearInterval(intervalID);
         isSorting = false;
         btn.style.backgroundColor = "";
         btn.textContent = "Auto Sort";
         btn.style.color = "#9ECEDE";
-        
       }
     }, 500);
   }
@@ -255,13 +261,24 @@ function updateSliderProgress(sliderElement){
 function sliderStepChanged(value) {
   stepIndex = parseInt(value);
   drawWithLabels(steps[stepIndex].array, steps[stepIndex].comparing, steps[stepIndex].sorted);
-
   updateSliderProgress(slider);
+  highlightLine(steps[stepIndex].line || 0);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   updateSliderProgress(slider)
 })
 
+function highlightLine(lineNum){
+  const lines = document.querySelectorAll('#pseudocode span');
+  lines.forEach((line, idx) => {
+    line.classList.toggle("highlight", idx + 1 === lineNum);
+  });
+}
+
 // Gọi khi load
 generateData();
+
+pseudocode.addEventListener("click", function() {
+  this.classList.add("pseudocode_close")
+})
