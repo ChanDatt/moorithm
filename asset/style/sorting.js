@@ -5,6 +5,9 @@ const toggle = document.querySelector(".toggle");
 const elementsInput = document.getElementById("elements");
 const wrongElements = document.getElementById("wrongElements");
 const pseudocode = document.getElementById("pseudocode-box");
+const pseudocodeChevrons = document.getElementById("chevrons_1")
+const sortingOption = document.getElementById("sorting_option")
+const selectSorting = document.getElementById("select_sorting")
 
 let array = [];
 let steps = [];
@@ -266,7 +269,8 @@ function sliderStepChanged(value) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  updateSliderProgress(slider)
+  updateSliderProgress(slider);
+  pseudocodeChevrons.classList.add("hidden")
 })
 
 function highlightLine(lineNum){
@@ -279,6 +283,47 @@ function highlightLine(lineNum){
 // Gọi khi load
 generateData();
 
+
+
+
+// Pseudo Code 
 pseudocode.addEventListener("click", function() {
-  this.classList.add("pseudocode_close")
+  this.classList.add("pseudocode_close");
+  setTimeout(() => {
+      pseudocodeChevrons.classList.remove("hidden");
+  }, 500);
 })
+
+pseudocodeChevrons.addEventListener("click", function(event){
+  pseudocode.classList.remove("pseudocode_close");
+  this.classList.add("hidden");
+
+  event.stopPropagation();
+})
+
+
+
+
+// Menu Sorting 
+sortingOption.addEventListener("click", () => {
+  selectSorting.classList.add("fade_in");
+  selectSorting.style.pointerEvents = "auto";
+
+  triggerSpacingAnimation();
+})
+
+addEventListener("click", function(event){
+  if(!selectSorting.contains(event.target) && event.target != sortingOption){
+    selectSorting.classList.remove("fade_in");
+    selectSorting.style.pointerEvents = "none";
+  }
+})
+
+function triggerSpacingAnimation(){
+  sortingOption.classList.remove("animate-spacing");
+  void sortingOption.offsetWidth;
+  sortingOption.classList.add("animate-spacing");
+}
+
+setInterval(triggerSpacingAnimation, 30000);
+
