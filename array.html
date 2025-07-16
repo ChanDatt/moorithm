@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./asset/style/array.css">
+    <title>moorithm</title>
+</head>
+<body>
+    <div class= "title">
+        <h1>moorithm</h1>
+    </div>
+    
+    <nav class="slidebar close">
+        <div id = 'chevrons'>
+            <i class='bx bx-chevrons-left toggle'></i> 
+        </div>
+        <ul>
+            <li><a href="./array.html" id="arr">array</a></li>
+            <li><a href="#" id="linkedList">linked list</a></li>
+            <li><a href="./sorting.html" id="sorting">sorting</a></li>
+            <li><a href="#" id="hashTable">hash table</a></li>
+            <li><a href="#" id="bst">bst</a></li>
+        </ul>        
+    </nav>
+    <div class="home">
+        <div class="arr_title">
+            <h2>Array</h2>
+        </div>
+        <div class="controls">
+            <div class="ctrl_above">
+                <h3>Number</h3>
+                <input type="number" id="numElements" value="8" min="5" max="30">
+                <button onclick="generateRandom()">Random</button>
+                <div id="step-controls">
+                    <button onclick="add()">Add</button>
+                    <button onclick="update()">Update</button>
+                    <button onclick="del()">Delete</button>
+                    <button onclick="run()">Run</button>
+                </div>
+            </div>
+            <div class="ctrl_below">
+                <h3>Value</h3>
+                <input type="text" id = "elements" class="lengthen" value="12, 18, 13, 23, 4, 1, 19, 7">
+                <button onclick="generateData()">Create</button>
+                <div id="step-controls">
+                    <button onclick="prevStep()">Previous</button>
+                    <button onclick="nextStep()">Next</button>
+                    <button onclick="resetSteps()">Reset</button>
+                </div>
+            </div>
+        </div>
+        <canvas id="arrayCanvas"></canvas>     
+    </div>
+    
+    <script src="./asset/style/array.js"></script>
+</body>
+</html>

@@ -8,12 +8,23 @@ const pseudocode = document.getElementById("pseudocode-box");
 const pseudocodeChevrons = document.getElementById("chevrons_1")
 const sortingOption = document.getElementById("sorting_option")
 const selectSorting = document.getElementById("select_sorting")
+const sortingListItems = document.querySelectorAll(".sorting_list");
 
 let array = [];
 let steps = [];
 let stepIndex = 0;
 let isSorting = false;
 let intervalID;
+
+let currentSortFunction = runBubbleSort;
+
+const sortFunctions = {
+  "Bubble": runBubbleSort,
+  "Selection": runSelectionSort,
+  "Insertion": runInsertionSort,
+  // "Merge": runMergeSort,
+  // "Quick": runQuickSort,
+};
 
 const btn = document.getElementById("btnAutoSorting");
 const slider = document.getElementById("stepSlider");
@@ -24,10 +35,15 @@ toggle.addEventListener("click", () => {
   slidebar.classList.toggle("close");
 });
 
+window.onload = function(){
+    setTimeout(() =>{
+        toggle.click();
+    }, 150);
+};
+
 elementsInput.addEventListener("click", function() {
   this.classList.add("expanded");
 });
-
 
 // Kiểm tra nhập input hợp lệ
 elementsInput.addEventListener("input", function () {
@@ -105,7 +121,6 @@ function drawWithLabels(arr, highlight = [], sorted = []) {
   elementsInput.classList.remove("expanded");
 }
 
-// Animation tạo mảng
 function animateCreate(arr) {
   const stepsCount = 30;
   let frame = 0;
@@ -124,7 +139,6 @@ function animateCreate(arr) {
   }, 16);
 }
 
-// Hàm chính: Tạo mảng từ input hoặc random
 function generateData() {
   const n = parseInt(document.getElementById("numElements").value);
   const input = elementsInput.value.trim();
@@ -159,11 +173,11 @@ function generateData() {
   stepIndex = 0;
   elementsInput.classList.remove("expanded");
   animateCreate(array);
-  runSort();
+  currentSortFunction();
 }
 
 // Bubble Sort lưu từng bước
-function runSort() {
+function runBubbleSort() {
   let arr = array.slice();
   let sorted = [];
   steps = [{ array: arr.slice(), comparing: [], sorted: [] }];
@@ -186,7 +200,75 @@ function runSort() {
   slider.max = steps.length - 1;
   slider.value = 0;
   drawWithLabels(steps[0].array, steps[0].comparing, steps[0].sorted);
+  stepIndex = 0;
 }
+
+function runSelectionSort() {
+  let arr = array.slice();
+  let sorted = [];
+  steps = [{ array: arr.slice(), comparing: [], sorted: [] }];
+
+  for (let i = 0; i < arr.length - 1; i++) {
+    let minIdx = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      steps.push({ array: arr.slice(), comparing: [minIdx, j], sorted: sorted.slice(), line: 4 });
+
+      if (arr[j] < arr[minIdx]) {
+        minIdx = j;
+        steps.push({ array: arr.slice(), comparing: [i, minIdx], sorted: sorted.slice(), line: 5 });
+      }
+    }
+
+    if (minIdx !== i) {
+      [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+      steps.push({ array: arr.slice(), comparing: [i, minIdx], sorted: sorted.slice(), line: 6 });
+    }
+
+    sorted.push(i);
+    steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice(), line: 4 });
+  }
+
+  sorted.push(arr.length - 1); // phần tử cuối cùng cũng được xem là sorted
+  steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice(), line: 4 });
+
+  slider.max = steps.length - 1;
+  slider.value = 0;
+  drawWithLabels(steps[0].array, steps[0].comparing, steps[0].sorted);
+  stepIndex = 0;
+}
+
+function runInsertionSort() {
+  let arr = array.slice();
+  let sorted = [];
+  steps = [{ array: arr.slice(), comparing: [], sorted: [] }];
+
+  for (let i = 1; i < arr.length; i++) {
+    let key = arr[i];
+    let j = i - 1;
+
+    steps.push({ array: arr.slice(), comparing: [i], sorted: sorted.slice(), line: 3 });
+
+    while (j >= 0 && arr[j] > key) {
+      arr[j + 1] = arr[j];
+      steps.push({ array: arr.slice(), comparing: [j, j + 1], sorted: sorted.slice(), line: 4 });
+      j--;
+    }
+
+    arr[j + 1] = key;
+    steps.push({ array: arr.slice(), comparing: [j + 1], sorted: sorted.slice(), line: 5 });
+
+    // Optional: mark first i+1 elements as sorted visually
+    sorted = Array.from({ length: i + 1 }, (_, idx) => idx);
+    steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice(), line: 6 });
+  }
+
+  slider.max = steps.length - 1;
+  slider.value = 0;
+  drawWithLabels(steps[0].array, steps[0].comparing, steps[0].sorted);
+  stepIndex = 0;
+}
+
+
 
 // Bước tiếp
 function nextStep() {
@@ -268,11 +350,6 @@ function sliderStepChanged(value) {
   highlightLine(steps[stepIndex].line || 0);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  updateSliderProgress(slider);
-  pseudocodeChevrons.classList.add("hidden")
-})
-
 function highlightLine(lineNum){
   const lines = document.querySelectorAll('#pseudocode span');
   lines.forEach((line, idx) => {
@@ -282,8 +359,6 @@ function highlightLine(lineNum){
 
 // Gọi khi load
 generateData();
-
-
 
 
 // Pseudo Code 
@@ -300,6 +375,20 @@ pseudocodeChevrons.addEventListener("click", function(event){
 
   event.stopPropagation();
 })
+
+function updatePseudocode(algoName) {
+  const pseudocodeBox = document.getElementById("pseudocode");
+  const template = document.getElementById(`pseudocode-${algoName.toLowerCase()}`);
+  if (template) {
+    pseudocodeBox.innerHTML = template.innerHTML;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateSliderProgress(slider);
+  pseudocodeChevrons.classList.add("hidden");
+  updatePseudocode("Bubble"); 
+});
 
 
 
@@ -326,4 +415,24 @@ function triggerSpacingAnimation(){
 }
 
 setInterval(triggerSpacingAnimation, 30000);
+
+
+
+sortingListItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    const selected = item.innerText;
+
+    sortingOption.textContent = selected;
+
+    const sortFunc = sortFunctions[selected];
+    if (sortFunc) {
+      currentSortFunction = sortFunc;     
+      sortFunc();                         
+    }
+    updatePseudocode(selected); 
+
+    selectSorting.classList.remove("fade_in");
+    selectSorting.style.pointerEvents = "none";
+  });
+});
 

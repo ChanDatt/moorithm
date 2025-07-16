@@ -18,18 +18,26 @@
     --text-color-medium: #5791AB;
     --text-color-light: #9ECEDE;
     --text-color-lightest: #D0D7E2;
+    --text-color-yellow: #F5D04C;
+    --text-color-yellow-2: #cfab27;
+
     --text-color-blur: rgba(225, 255, 255, 0.05);
+    --text-color-blur-light: rgba(191, 227, 227, 0.73);
     --text-hover-color-01: ;
     --text-hover-color-02: ;
 
+    --font-family: Conthrax, 'Courier New', monospace;
     --blur: 15px;
-
+    --shadow-dark: 2px 2px 20px rgba(0, 0, 0, 0.5);
+    --shadow-light: 0 0 0 4px rgba(158, 206, 222, 0.5);
     /********* TRANSITION *********/
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
     --tran-04: all 0.4s ease;
     --tran-05: all 0.5s ease;
+    --tran-10: all 1s ease;
 }
+
 
 body{
     height: 100vh;
@@ -136,28 +144,87 @@ nav a:hover{
     transform: rotate(180deg);
 }
 
+h2 {
+    text-align: center; 
+    font-size: 45px;
+    letter-spacing: 5px;
+    color: var(--text-color-yellow-2); 
+    cursor: pointer;
+}
+
 .home{
-    display: none;
-    position: relative;
-    left: 250px;
-    height: 100vh;
-    width: calc(100% - 250px);
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    height: 92%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.slidebar.close ~ .home{
-    left: 88px;
-    width: calc(100% - 88px)
+.sort_title{
+    width: 100%;
 }
 
-.home .box{
-    height: 550px;
-    width: 550px;
-    background-color: var(--text-color-blur);
-    backdrop-filter: blur(var(--blur));
+.controls {
+    width: 848px;
+    margin: 25px auto 10px auto;
+}
+
+
+.ctrl_above, .ctrl_below {
+    display: flex;
+}
+
+h3{
+    width: 100px;
+    align-content: center;
+    text-align: right;
+    margin-right: 10px;
+    color: var(--text-color-yellow-2);
+}
+
+.controls input{
+    width: 50px;
+}
+
+.lengthen{
+    width: 50px;
+    transition: var(--tran-10);
+}
+
+.lengthen.expanded{
+    width: 160px;
+}
+
+#step-controls {
+    margin-left: auto;
+}
+
+input, button {
+    padding: 8px;
+    margin: 5px;
+    font: var(--font-family);
+    font-size: 12px;
     border-radius: 25px;
-    box-shadow: 10px 0 10px rgba(0,0,0,0.1);
-    transition: var(--tran-04);
+    border-color: var(--text-color-light);
+    color: var(--text-color-light);
+    background-color: var(--text-color-blur);
 }
 
+.controls button{
+    width: 100px;
+}
+
+.controls_2{
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 18.5px;
+}
+
+
+#arrayCanvas{
+    width: 100%;
+    height: 200px;
+    margin: 0 auto 0 auto;
+}

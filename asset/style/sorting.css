@@ -137,6 +137,7 @@ nav a:hover{
 
 .home{
     position: absolute;
+    height: 92%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -290,7 +291,7 @@ canvas {
     font-size: 11px;
     line-height: 0.5;
     color: #d0d7e2;
-    max-width: 415px;
+    width: 336px;
     z-index: 1000;
     box-shadow: var(--shadow-dark);
     backdrop-filter: blur(10px);
@@ -391,7 +392,6 @@ canvas {
 }
 
 
-
 @keyframes wiggleSpacing {
   0%, 100% {
     letter-spacing: auto;
@@ -413,3 +413,4 @@ h2.animate-spacing {
   animation: wiggleSpacing 1s ease;
   transition: 0.5s ease;
 }
+

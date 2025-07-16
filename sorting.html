@@ -17,10 +17,10 @@
             <i class='bx bx-chevrons-left toggle'></i> 
         </div>
         <ul>
-            <li><a href="#" id="arr">array</a></li>
-            <li><a href="#" id="linkedList">linked list</a></li>
-            <li><a href="#" id="sorting">sorting</a></li>
-            <li><a href="#" id="hashTable">hash table</a></li>
+            <li><a href="./array.html" id="arr">array</a></li>
+            <li><a href="./linkedList" id="linkedList">linked list</a></li>
+            <li><a href="./sorting.html" id="sorting">sorting</a></li>
+            <li><a href="./hashTable" id="hashTable">hash table</a></li>
             <li><a href="#" id="bst">bst</a></li>
         </ul>        
     </nav>
@@ -28,47 +28,67 @@
         <div class="sort_title">
             <h2 id="sorting_option">Bubble Sort</h2>
         </div>
-                <div class="controls">
-                        <div class="ctrl_above">
-                            <h3>Number</h3>
-                            <input type="number" id="numElements" value="8" min="5" max="30">
-                            <button onclick="generateRandom()">Random</button>
-                        </div>
-                        <div class="ctrl_below">
-                            <h3>Value</h3>
-                            <input type="text" id = "elements" class="lengthen" value="12, 18, 13, 23, 4, 1, 19, 7">
-                            <button onclick="generateData()">Create</button>
-                            <div id="step-controls">
-                                <button onclick="prevStep()">Previous</button>
-                                <button onclick="nextStep()">Next</button>
-                                <button id="btnAutoSorting" onclick="autoSort()">Auto Sort</button>
-                                <button onclick="resetSteps()">Reset</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                <div class="controls_2">
-                    <div class="wrong_text">
-                        <p id = "wrongElements"></p>
-                    </div>
-                    <input type="range" id="stepSlider" min="0" max="0" value="0" step="1" oninput="sliderStepChanged(this.value)"/>
+        <div class="controls">
+            <div class="ctrl_above">
+                <h3>Number</h3>
+                <input type="number" id="numElements" value="8" min="5" max="30">
+                <button onclick="generateRandom()">Random</button>
+            </div>
+            <div class="ctrl_below">
+                <h3>Value</h3>
+                <input type="text" id = "elements" class="lengthen" value="12, 18, 13, 23, 4, 1, 19, 7">
+                <button onclick="generateData()">Create</button>
+                <div id="step-controls">
+                    <button onclick="prevStep()">Previous</button>
+                    <button onclick="nextStep()">Next</button>
+                    <button id="btnAutoSorting" onclick="autoSort()">Auto Sort</button>
+                    <button onclick="resetSteps()">Reset</button>
                 </div>
-
-              <canvas id="visualizer" width="800" height="400"></canvas>
+            </div>
+        </div>            
+        <div class="controls_2">
+            <div class="wrong_text">
+                <p id = "wrongElements"></p>
+            </div>
+            <input type="range" id="stepSlider" min="0" max="0" value="0" step="1" oninput="sliderStepChanged(this.value)"/>
+        </div>
+        <canvas id="visualizer" width="800" height="400"></canvas>
     </div>
     
     <div id="pseudocode-box">
         <div id = 'chevrons_1'>
             <i class='bx bx-chevrons-left'></i> 
         </div>
-        <pre><code id="pseudocode">
-            <span id="line1">void bubbleSort(int numbers[], int array_size) {</span>
-            <span id="line2">   int i, j;</span>
-            <span id="line3">   for (i = array_size - 1; i >= 0; i--)</span>
-            <span id="line4">      for (j = 1; j <= i; j++)</span>
-            <span id="line5">         if (numbers[j - 1] > numbers[j])</span>
-            <span id="line6">            swap(numbers[j - 1], numbers[j]) }</span>
-        </code></pre>
+        <pre><code id="pseudocode"></code></pre>
+            <template id="pseudocode-bubble">
+                <span>void bubbleSort(int numbers[], int array_size) {</span>
+                <span>   int i, j;</span>
+                <span>   for (i = array_size - 1; i >= 0; i--)</span>
+                <span>      for (j = 1; j <= i; j++)</span>
+                <span>         if (numbers[j - 1] > numbers[j])</span>
+                <span>            swap(numbers[j - 1], numbers[j]); }</span>
+            </template>
+
+            <template id="pseudocode-selection">
+                <span>void selectionSort(int arr[], int n) {</span>
+                <span>   for (int i = 0; i < n-1; i++) {</span>
+                <span>      int min_idx = i;</span>
+                <span>      for (int j = i+1; j < n; j++)</span>
+                <span>         if (arr[j] < arr[min_idx])</span>
+                <span>            min_idx = j;</span>
+                <span>      swap(arr[min_idx], arr[i]); }}</span>
+            </template>
+
+            <template id="pseudocode-insertion">
+                <span>void insertionSort(int arr[], int n) {</span>
+                <span>   for (int i = 1; i < n; i++) {</span>
+                <span>      int key = arr[i];</span>
+                <span>      int j = i - 1;</span>
+                <span>      while (j >= 0 && arr[j] > key) {</span>
+                <span>         arr[j + 1] = arr[j];</span>
+                <span>         j = j - 1; }</span>
+                <span>      arr[j + 1] = key; }}</span>
+            </template>
     </div>
 
     <div id="select_sorting">
