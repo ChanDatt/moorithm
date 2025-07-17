@@ -31,7 +31,7 @@
         <div class="controls">
             <div class="ctrl_above">
                 <h3>Number</h3>
-                <input type="number" id="numElements" value="8" min="5" max="30">
+                <input type="number" id="numElements" value="8" min="5" max="20">
                 <button onclick="generateRandom()">Random</button>
                 <div id="step-controls">
                     <button onclick="add()">Add</button>
@@ -51,7 +51,10 @@
                 </div>
             </div>
         </div>
-        <canvas id="arrayCanvas"></canvas>     
+
+        <div id="svgContainer">
+            <svg id="arraySVG" width="1300" height="200"></svg>
+        </div>
     </div>
     
     <script src="./asset/style/array.js"></script>

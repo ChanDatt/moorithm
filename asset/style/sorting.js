@@ -118,7 +118,6 @@ function drawWithLabels(arr, highlight = [], sorted = []) {
     ctx.fillText(Math.round(val), x + barWidth / 2, y - 6);
     ctx.fillText(idx, x + barWidth / 2, canvas.height - 4);
   });
-  elementsInput.classList.remove("expanded");
 }
 
 function animateCreate(arr) {
@@ -171,7 +170,6 @@ function generateData() {
   array = values;
   steps = [{ array: array.slice(), comparing: [] }];
   stepIndex = 0;
-  elementsInput.classList.remove("expanded");
   animateCreate(array);
   currentSortFunction();
 }
@@ -228,7 +226,7 @@ function runSelectionSort() {
     steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice(), line: 4 });
   }
 
-  sorted.push(arr.length - 1); // phần tử cuối cùng cũng được xem là sorted
+  sorted.push(arr.length - 1);
   steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice(), line: 4 });
 
   slider.max = steps.length - 1;
@@ -257,7 +255,6 @@ function runInsertionSort() {
     arr[j + 1] = key;
     steps.push({ array: arr.slice(), comparing: [j + 1], sorted: sorted.slice(), line: 5 });
 
-    // Optional: mark first i+1 elements as sorted visually
     sorted = Array.from({ length: i + 1 }, (_, idx) => idx);
     steps.push({ array: arr.slice(), comparing: [], sorted: sorted.slice(), line: 6 });
   }
@@ -405,6 +402,9 @@ addEventListener("click", function(event){
   if(!selectSorting.contains(event.target) && event.target != sortingOption){
     selectSorting.classList.remove("fade_in");
     selectSorting.style.pointerEvents = "none";
+  } 
+  if (!elementsInput.contains(event.target) && event.target != elementsInput){
+    elementsInput.classList.remove("expanded");
   }
 })
 
