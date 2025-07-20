@@ -171,7 +171,7 @@ h2 {
 }
 
 
-.ctrl_above, .ctrl_below {
+.ctrl_above, .ctrl_below{
     display: flex;
 }
 
@@ -222,9 +222,42 @@ input, button {
     height: 18.5px;
 }
 
+.input_value input{
+    width: 100px;
+    margin: auto 5px;
+}
+
+.input_value input::placeholder{
+    color: var(--text-color-light);
+}
+
+.input_value{
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 100%;
+}
+
+.input_value_index{
+    margin-left: auto;
+}
+
+.wrongElements{
+    width: 750px;
+    text-shadow: var(--shadow-dark);
+}
+
+.wrong_text{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    color: rgb(239, 77, 77);
+    white-space: nowrap; 
+    align-items: center;
+}
+
 rect {
-    fill: hsla(204, 70%, 53%, 0);
-    stroke: var(--text-color-medium);
+    fill: #00000000;
     stroke-width: 3px;
     transition: fill 0.3s ease;
 }
@@ -234,13 +267,13 @@ rect.highlight {
 }
 
 text{
-    font-size: 18px;
     fill: var(--text-color-darkest);
 }
-  
+
 #svgContainer{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 400px;
 }
+

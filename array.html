@@ -34,10 +34,9 @@
                 <input type="number" id="numElements" value="8" min="5" max="20">
                 <button onclick="generateRandom()">Random</button>
                 <div id="step-controls">
-                    <button onclick="add()">Add</button>
-                    <button onclick="update()">Update</button>
-                    <button onclick="del()">Delete</button>
-                    <button onclick="run()">Run</button>
+                    <button onclick="addElement()">Add</button>
+                    <button onclick="updateElement()">Update</button>
+                    <button onclick="deleteElement()">Delete</button>
                 </div>
             </div>
             <div class="ctrl_below">
@@ -50,10 +49,19 @@
                     <button onclick="resetSteps()">Reset</button>
                 </div>
             </div>
+            <div class="input_value">
+                <div class="wrong_text">
+                    <p id = "wrongElements"></p>
+                </div>
+                <div class="input_value_index">
+                    <input type="number" id="insertValue" placeholder="Value" min="0" max="99"/>
+                    <input type="number" id="insertIndex" placeholder="Index" min="0" max="20"/>
+                </div>
+            </div>
         </div>
 
         <div id="svgContainer">
-            <svg id="arraySVG" width="1300" height="200"></svg>
+            <svg id="arraySVG" width="1300" height="250"></svg>
         </div>
     </div>
     
